@@ -1,4 +1,4 @@
-# About Base Laravel
+# About Base Laravel v5.4.x
 
 ## Required
 
@@ -11,7 +11,17 @@
  - bower
  - webpack
 
-## Setup for project
+## Setup for project with Api
+
+```sh
+$ git clone git@github.com:dung13890/code_base.git
+$ cd project
+$ composer install --no-scripts
+$ cp .env.example .env
+$ php artisan key:generate
+```
+
+## Setup for project with Web application
 
 ```sh
 $ git clone git@github.com:dung13890/code_base.git
@@ -36,17 +46,21 @@ $ vim .env
 
 Change DB_DATABASE, DB_USERNAME and DB_PASSWORD
 
-## Start production
+## Migrate && seed data factories
 
 ```sh
 $ php artisan migrate:refresh --seed
+```
+
+## Start web application production
+
+```sh
 $ npm run production
 ```
 
-## Start Dev
+## Start web application Dev
 
 ```sh
-$ php artisan migrate:refresh --seed
 $ npm run dev or $ npm run watch
 ```
 
