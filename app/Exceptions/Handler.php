@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Exception;
+use Illuminate\Validation\ValidationException;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
@@ -20,6 +21,7 @@ class Handler extends ExceptionHandler
         \Illuminate\Database\Eloquent\ModelNotFoundException::class,
         \Illuminate\Session\TokenMismatchException::class,
         \Illuminate\Validation\ValidationException::class,
+        \App\Exceptions\ValidationException::class,
     ];
 
     /**
@@ -44,7 +46,36 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if ($request->expectsJson()) {
+            return $this->formatRender($exception);
+        }
+
         return parent::render($request, $exception);
+    }
+
+    public function formatRender(Exception $exception)
+    {
+        $arrayCodeHttp = ['401', '403', '404', '405', '422', '500'];
+        $code = $exception->getCode();
+        
+        if (!in_array($code, $arrayCodeHttp)) {
+            $code = 500;
+        }
+
+        $response = [
+            'message' => [
+                'status' => false,
+                'code' => $code,
+                'message' => $exception->getMessage(),
+            ]
+        ];
+
+        if ($exception instanceof ValidationException) {
+            $code = 422;
+            $response['message']['validator'] = $exception->validator->errors()->all();
+        }
+
+        return response()->json($response, $code);
     }
 
     /**

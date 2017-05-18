@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Bus\DispatchesJobs;
 
 abstract class AbstractController extends Controller
 {
+    use DispatchesJobs;
+    
     protected $repository;
 
     protected $repositoryName;
