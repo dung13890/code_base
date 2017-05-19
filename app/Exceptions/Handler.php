@@ -66,13 +66,13 @@ class Handler extends ExceptionHandler
             'message' => [
                 'status' => false,
                 'code' => $code,
-                'message' => $exception->getMessage(),
+                'description' => $exception->getMessage(),
             ]
         ];
 
         if ($exception instanceof ValidationException) {
             $code = 422;
-            $response['message']['validator'] = $exception->validator->errors()->all();
+            $response['description']['validator'] = $exception->validator->errors()->all();
         }
 
         return response()->json($response, $code);

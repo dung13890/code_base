@@ -32,7 +32,7 @@ abstract class AbstractController extends Controller
 
     protected function repositorySetup($repository = null)
     {
-        $this->repository = $repository->setUserId($this->user->id);
+        $this->repository = $this->user ? $repository->setUserId($this->user->id) : $repository;
         $this->repositoryName = strtolower(class_basename($this->repository->model()));
     }
 

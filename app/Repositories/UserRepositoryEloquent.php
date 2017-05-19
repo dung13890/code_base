@@ -34,4 +34,9 @@ class UserRepositoryEloquent extends AbstractRepositoryEloquent implements UserR
     {
         return $this->model()->all($columns);
     }
+
+    public function random($columns = ['*'])
+    {
+        return $this->model()->inRandomOrder()->first($columns);
+    }
 }

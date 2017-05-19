@@ -1,5 +1,18 @@
 # About Base Laravel v5.4.x
 
+Code base with Api application and Web application
+
+- [x] Design pattern
+- [x] Authenticate with passport
+- [x] Permission with policies
+- [x] Dependencies with bower & npm
+- [x] Yajra/Datatables
+
+You can sign in with account demo
+
+>   # http://domain.com/login
+>    account: admin/secret
+
 ## Required
 
  - Git
@@ -67,5 +80,5 @@ $ npm run dev or $ npm run watch
 ## Test
 
 ```sh
-$ phpunit
+$ ./vendor/bin/phpunit
 ```
