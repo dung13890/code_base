@@ -29,4 +29,9 @@ class UserRepositoryEloquent extends AbstractRepositoryEloquent implements UserR
     {
         return new User;
     }
+
+    public function getData($columns = ['*'])
+    {
+        return $this->model()->all($columns);
+    }
 }

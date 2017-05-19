@@ -26,5 +26,10 @@ class AppServiceProvider extends ServiceProvider
         if (env('APP_ENV') === 'local' || env('APP_ENV') === 'dev') {
             $this->app->register(\Barryvdh\Debugbar\ServiceProvider::class);
         }
+
+        $this->app->bind(
+            \App\Contracts\Services\PassportInterface::class,
+            \App\Services\PassportService::class
+        );
     }
 }
