@@ -1,12 +1,17 @@
 # About Base Laravel v5.4.x
 
+[![Build Status](https://api.travis-ci.org/dung13890/code_base.svg)](https://travis-ci.org/dung13890/code_base)
+
 Code base with Api application and Web application
+
+I use docker [shincoder/homestead](https://hub.docker.com/r/shincoder/homestead) && [mariadb](https://hub.docker.com/_/mariadb)
 
 - [x] Design pattern
 - [x] Authenticate with passport
 - [x] Permission with policies
-- [x] Dependencies with bower & npm
 - [x] Yajra/Datatables
+- [x] Dependencies with bower & npm
+- [x] Use Laravel mix compiling assets
 
 You can sign in with account demo
 
