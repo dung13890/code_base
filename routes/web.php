@@ -12,9 +12,7 @@
 */
 
 Route::group(['prefix' => '/', 'namespace' => 'Frontend'], function () {
-    Route::get('/', function () {
-        return view('welcome');
-    });
+    Route::get('/', 'HomeController@index')->name('home');
 });
 
 Route::group(['namespace' => 'Backend'], function () {

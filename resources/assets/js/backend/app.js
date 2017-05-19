@@ -29,6 +29,11 @@ var CRUD = (function () {
 
   CRUD.prototype.setJquery = function ($) {
     _$ = $ || jQuery || window.jQuery || window.$;
+    _$.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': document.head.querySelector('meta[name="csrf-token"]').content
+      }
+    });
     
     return _$;
   };
@@ -149,11 +154,3 @@ var CRUD = (function () {
 
   return CRUD;
 })();
-
-jQuery(document).ready(function($) {
-  $.ajaxSetup({
-    headers: {
-      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-  });
-});
