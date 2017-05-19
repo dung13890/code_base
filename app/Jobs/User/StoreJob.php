@@ -30,6 +30,9 @@ class StoreJob
     public function handle(UserRepository $repository)
     {
         $data = array_only($this->attributes, $repository->getFillable());
+        if (isset($this->attributes['password'])) {
+            $data['password'] = $this->attributes['password'];
+        }
         
         $item = $repository->create($data);
     }
