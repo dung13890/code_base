@@ -15,6 +15,14 @@ class AuthenticateTest extends TestCase
     public function setUp()
     {
         parent::setUp();
+        \Artisan::call('passport:client', [
+            '--password' => true,
+            '--name' => 'api',
+        ]);
+
+        \DB::table('oauth_clients')->where('id', env('API_CLIENT_ID'))->update([
+            'secret' => env('API_CLIENT_SECRET'),
+        ]);
     }
 
     public function getHeader($header = [])
@@ -52,15 +60,12 @@ class AuthenticateTest extends TestCase
         ]);
     }
 
-    public function testLoginSuccess()
+    public function tesLoginSuccess()
     {
         $data = app(User::class)->find(1, ['email'])->toArray();
         $data['password'] = 'secret';
         $response = $this->call('POST', route('api.v1.login'), $data, [], [], $this->getHeader());
         $response->assertJsonStructure([
-            'passport' => [
-                'token_type', 'expires_in', 'access_token', 'refresh_token'
-            ],
             'message' => [
                 'status', 'code',
             ],
