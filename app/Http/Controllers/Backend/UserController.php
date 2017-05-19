@@ -32,4 +32,23 @@ class UserController extends BackendController
 
         return $this->viewRender();
     }
+
+    public function create()
+    {
+        $this->before(__FUNCTION__);
+        parent::create();
+
+        return $this->viewRender();
+    }
+
+    public function store(Request $request)
+    {
+        $this->before(__FUNCTION__);
+        $this->validate($request, $this->repository->validation('store'));
+        $data = $request->all();
+
+        return $this->doRequest(function () use ($data) {
+            return $this->dispatch(new StoreJob($data));
+        });
+    }
 }

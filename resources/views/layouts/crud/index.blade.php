@@ -33,15 +33,13 @@
 <div class="content">
     <div class="row">
         <div class="col-xs-12">
-            <div class="box">
-                <div class="box-header with-border">
+            <div class="panel panel-default">
+                <div class="panel-heading">
                     @if (Route::has("backend.{$resource}.create"))
-                    <div class="pull-right">
-                        <a href='{{ route("backend.{$resource}.create") }}' class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> {{ __('repositories.create') }}</a>
-                    </div>
+                    <a href='{{ route("backend.{$resource}.create") }}' class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> {{ __('repositories.create') }}</a>
                     @endif
                 </div>
-                <div class="box-body">
+                <div class="panel-body">
                     @stack('index-table-filter')
                     <div class="table-responsive">
                         <table id="table-index" class="table table-bordered table-hover" width="100%">

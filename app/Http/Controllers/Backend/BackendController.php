@@ -100,7 +100,7 @@ abstract class BackendController extends AbstractController
             $this->e['message'] = __("repositories.unsuccessfully");
         }
 
-        if (Request::ajax()) {
+        if (\Request::ajax()) {
             return ($this->e['code'] == 0) ? response()->json($this->e) : response()->json($this->e, 402);
         }
 
