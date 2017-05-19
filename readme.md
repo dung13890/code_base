@@ -16,7 +16,7 @@ I use docker [shincoder/homestead](https://hub.docker.com/r/shincoder/homestead)
 You can sign in with account demo
 
 >   # http://domain.com/login
->    account: admin/secret
+>    account: admin@example.com/secret
 
 ## Required
 

@@ -46,6 +46,10 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if ($exception instanceof AuthenticationException) {
+            return $this->unauthenticated($request, $exception);
+        }
+
         if ($request->expectsJson()) {
             return $this->formatRender($exception);
         }
@@ -55,7 +59,7 @@ class Handler extends ExceptionHandler
 
     public function formatRender(Exception $exception)
     {
-        $arrayCodeHttp = ['401', '403', '404', '405', '422', '500'];
+        $arrayCodeHttp = ['401', '403', '404', '422', '500'];
         $code = $exception->getCode();
         
         if (!in_array($code, $arrayCodeHttp)) {
@@ -72,6 +76,7 @@ class Handler extends ExceptionHandler
 
         if ($exception instanceof ValidationException) {
             $code = 422;
+            $response['message']['code'] = 422;
             $response['description']['validator'] = $exception->validator->errors()->all();
         }
 
@@ -88,7 +93,13 @@ class Handler extends ExceptionHandler
     protected function unauthenticated($request, AuthenticationException $exception)
     {
         if ($request->expectsJson()) {
-            return response()->json(['error' => 'Unauthenticated.'], 401);
+            return response()->json([
+                'message' => [
+                    'status' => false,
+                    'code' => 401,
+                    'description' => 'Unauthenticated',
+                ]
+            ], 401);
         }
 
         return redirect()->guest(route('login'));
