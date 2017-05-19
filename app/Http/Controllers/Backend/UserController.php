@@ -51,4 +51,39 @@ class UserController extends BackendController
             return $this->dispatch(new StoreJob($data));
         });
     }
+
+    public function edit($id)
+    {
+        parent::edit($id);
+        $this->before(__FUNCTION__, $this->compacts['item']);
+
+        return $this->viewRender();
+    }
+
+    public function update(Request $request, $id)
+    {
+        $item = $this->repository->findOrFail($id);
+        $this->before(__FUNCTION__, $item);
+
+        if (!$request->has('password')) {
+            $request->replace($request->except(['password', 'password_confirmation']));
+        }
+
+        $this->validate($request, $this->repository->validation('update', $item));
+        $data = $request->all();
+
+        return $this->doRequest(function () use ($item, $data) {
+            return $this->dispatch(new UpdateJob($item, $data));
+        });
+    }
+
+    public function destroy($id)
+    {
+        $item = $this->repository->findOrFail($id);
+        $this->before(__FUNCTION__, $item);
+
+        return $this->doRequest(function () use ($item) {
+            return $this->dispatch(new DeleteJob($item));
+        });
+    }
 }
