@@ -70,6 +70,18 @@ Change DB_DATABASE, DB_USERNAME and DB_PASSWORD
 $ php artisan migrate:refresh --seed
 ```
 
+## Start API application
+
+```sh
+# Setup passport run only once
+$ php artisan passport:install
+
+# Creating A Password Grant Client
+$ php artisan passport:client --password
+
+# Copy API_CLIENT_SECRET and API_CLIENT_id To .env
+```
+
 ## Start web application production
 
 ```sh
