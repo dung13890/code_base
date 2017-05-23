@@ -7,6 +7,7 @@ Code base with Api application and Web application
 I use docker [shincoder/homestead](https://hub.docker.com/r/shincoder/homestead) && [mariadb](https://hub.docker.com/_/mariadb)
 
 - [x] Design pattern
+- [x] Use Mysql or mongodb
 - [x] Authenticate with passport
 - [x] Permission with policies
 - [x] Yajra/Datatables
@@ -29,12 +30,27 @@ You can sign in with account demo
  - bower
  - webpack
 
-## Setup for project with Api
+## Setup for project with Mongodb
+
+Make sure you have the MongoDB PHP driver installed. You can find installation instructions at 
+[http://php.net/manual/en/mongodb.installation.php](http://php.net/manual/en/mongodb.installation.php)
 
 ```sh
 $ git clone git@github.com:dung13890/code_base.git
 $ cd project
 $ composer install --no-scripts
+$ cp .env.mongo .env
+$ php artisan key:generate
+$ php artisan db:seed --class=UsersMongoSeeder
+```
+In `App\Providers\RepositoryServiceProvider` Change singleton Mongo instead of Mysql
+
+## Setup for project with Api
+
+```sh
+$ git clone git@github.com:dung13890/code_base.git
+$ cd project
+$ composer install --ignore-platform-reqs --no-interaction
 $ cp .env.example .env
 $ php artisan key:generate
 ```
@@ -44,7 +60,7 @@ $ php artisan key:generate
 ```sh
 $ git clone git@github.com:dung13890/code_base.git
 $ cd project
-$ composer install --no-scripts
+$ composer install --ignore-platform-reqs --no-interaction
 $ npm install
 $ bower install
 $ cp .env.example .env

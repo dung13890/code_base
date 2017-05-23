@@ -10,6 +10,7 @@ class RepositoryServiceProvider extends ServiceProvider
         'user' => [
             \App\Contracts\Repositories\UserRepository::class,
             \App\Repositories\UserRepositoryEloquent::class,
+            \App\Repositories\UserRepositoryMongo::class,
         ],
     ];
     /**

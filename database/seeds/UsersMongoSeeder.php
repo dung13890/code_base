@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Eloquent\User;
+use App\Mongo\User;
 
-class UsersSeeder extends Seeder
+class UsersMongoSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,19 +12,17 @@ class UsersSeeder extends Seeder
      */
     public function run()
     {
-        factory(User::class, 20)->create();
-
         if (App::environment('local')) {
-            app(User::class)->find(1)->update([
+            app(User::class)->create([
                 'name' => 'system',
                 'email' => 'system@example.com',
-                'password' => 'secret',
+                'password' => bcrypt('secret'),
             ]);
 
-            app(User::class)->find(2)->update([
+            app(User::class)->create([
                 'name' => 'admin',
                 'email' => 'admin@example.com',
-                'password' => 'secret',
+                'password' => bcrypt('secret'),
             ]);
         }
     }

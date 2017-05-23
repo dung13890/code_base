@@ -170,6 +170,7 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Yajra\Datatables\DatatablesServiceProvider::class,
         Laravel\Passport\PassportServiceProvider::class,
+        
 
         /*
          * Application Service Providers...
@@ -233,6 +234,7 @@ return [
         'HTML' => Collective\Html\HtmlFacade::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
         'Datatables' => yajra\Datatables\Datatables::class,
+        'Moloquent'       => Jenssegers\Mongodb\Eloquent\Model::class,
 
     ],
 
