@@ -3,7 +3,7 @@
 @section('page-content')
 <div class="row">
     <div class="page-header">
-        <h1>Hello <small>{{ $item->name }}</small></h1>
+        <h1>Hello <small>{{ $item->name or 'Unknown' }}</small></h1>
     </div>
     <div class="jumbotron">
         <h1>Hello, world!</h1>

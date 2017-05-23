@@ -13,7 +13,7 @@ php:
 before_script:
   - cp .env.travis .env
   - mysql -e 'create database travis;'
-  - composer install --no-interaction
+  - composer install --ignore-platform-reqs --no-interaction
   - php artisan key:generate
   - php artisan migrate:refresh --seed
   - php artisan passport:install
